@@ -1,0 +1,45 @@
+# liquidez_masiva/config/settings.toml
+# Configuración declarativa del sistema Liquidez Masiva.
+# Todos los campos son validados por core/config.py al cargar.
+
+schema_version = 1
+
+[data]
+exchange = "binance"
+base_url = "https://api.binance.com"
+symbol = "BTCUSDT"
+interval = "1h"
+history_days = 1095
+cache_dir = "data/raw"
+request_timeout = 30.0
+page_limit = 1000
+sleep_between_pages = 0.2
+retry_attempts = 4
+
+[strategy]
+ema_fast = 20
+ema_slow = 50
+atr_period = 14
+donchian_period = 20
+vol_zscore_period = 50
+vol_zscore_threshold = 2.0
+allow_short = true
+
+[risk]
+initial_capital = 10000.0
+max_position_pct = 0.05
+stop_loss_atr_mult = 2.0
+daily_loss_limit_pct = 0.03
+leverage = 1.0
+
+[cost]
+fee_rate = 0.001
+slippage_bps = 5.0
+funding_rate_per_8h = 0.0
+
+[backtest]
+periods_per_year = 365
+min_bars = 200
+walk_forward_train_months = 12
+walk_forward_test_months = 3
+max_equity_points = 100000

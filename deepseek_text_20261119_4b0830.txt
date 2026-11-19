@@ -1,0 +1,16 @@
+# liquidez_masiva/requirements.txt
+# Dependencias núcleo (research + backtest)
+numpy>=1.23
+pandas>=1.5
+requests>=2.28
+
+# TOML parser fallback para Python < 3.11 (Pydroid 3 con Python 3.9/3.10)
+tomli>=2.0; python_version < "3.11"
+
+# UI opcional (instalar sólo si se usa app/streamlit_app.py)
+streamlit>=1.25
+
+# Desarrollo / CI (opcional)
+pytest>=7.0
+ruff>=0.1.0
+mypy>=1.0

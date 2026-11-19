@@ -1,0 +1,37 @@
+- **Por qué:** volatilidad realizada → base de stops.
+- **Limitación:** gaps la infravaloran.
+
+## Donchian
+`Upper_t = max(H_{t-N..t})`, `Lower_t = min(L_{t-N..t})`
+
+## z-score de volumen
+`z_t = (V_t - μ_{V,k}) / σ_{V,k}`
+- Devuelve `NaN` si `σ < 1e-12`.
+
+## Sharpe
+`S = (μ_r - rf) / σ_r · √P`
+- **Limitación:** penaliza upside; asume normalidad.
+
+## Sortino
+`So = (μ_r - τ) / σ_down · √P`
+- **Limitación:** τ arbitrario.
+
+## Max Drawdown
+`DD_t = (E_t - max_{s≤t} E_s)/max_{s≤t} E_s`; `MDD = min(DD_t) ≤ 0`.
+
+## Profit Factor
+`PF = Σ wins / |Σ losses|`. Devuelve `None` si `Σ losses = 0`.
+
+## Expectancy (R)
+`E_R = p_win·avg_win_R + p_loss·avg_loss_R` (avg_loss_R negativo).
+
+## Calmar
+`Calmar = annual_return / |MDD|`.
+
+## Omega
+`Ω = Σ(r>0)/Σ|r<0|` (threshold 0).
+
+## Liquidez Score
+`LS = 0.30·N(S) + 0.20·N(So) + 0.15·N(PF) + 0.20·N(Cal) + 0.15·N(WR)`
+con `N(x) = clamp((x-lo)/(hi-lo)·100, 0, 100)` y `lo/hi` documentados en
+`core/metrics.py`. None → 50 (neutralidad).

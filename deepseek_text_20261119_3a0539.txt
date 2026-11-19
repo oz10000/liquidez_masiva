@@ -1,0 +1,31 @@
+
+- **utils**: clamps, escritura atómica, formateo.
+- **indicators**: funciones puras vectorizadas.
+- **strategy**: reglas deterministas.
+- **risk**: sizing, stops, kill-switch.
+- **backtest**: motor event-driven.
+- **metrics**: Sharpe/Sortino/PF/DD/Expectancy/Calmar/Omega/Liquidez Score.
+- **report**: JSON/CSV/Markdown.
+- **app / scripts**: consumidores.
+
+## Sin dependencias circulares
+
+`core/__init__.py` no importa nada. Cada módulo importa sólo capas inferiores.
+
+## Thread-safety
+
+- `utils.atomic_write` → seguro entre procesos (Streamlit + CI).
+- `logging_utils` → thread-safe por logging de stdlib.
+- `KillSwitchState` → NO thread-safe por diseño (un runner por proceso).
+
+## Complejidad
+
+| Función | Temporal | Espacial |
+|---|---|---|
+| `fetch_klines` | O(N) | O(N) |
+| `compute_all` | O(N) | O(N) |
+| `generate_signals` | O(N) | O(N) |
+| `run_backtest` | O(N) | O(N + T) |
+| `compute_metrics` | O(N + T) | O(T) |
+
+N = velas, T = trades.

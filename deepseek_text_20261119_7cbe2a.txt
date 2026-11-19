@@ -1,0 +1,13 @@
+
+---
+
+## 13. `docs/ARCHITECTURE.md`
+
+### Justificación de preservación
+Documenta capas (`utils → indicators → strategy → risk → backtest → metrics → report → app/scripts`), ausencia de ciclos, thread-safety de `atomic_write`/`logging` y NO-thread-safety de `KillSwitchState` (correcto: un runner por proceso), y tabla de complejidades O(N)/O(N+T). Coherente con el código corregido. No requiere cambios.
+
+```markdown
+# liquidez_masiva/docs/ARCHITECTURE.md
+# Arquitectura
+
+## Capas

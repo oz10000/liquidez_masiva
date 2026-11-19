@@ -1,0 +1,6 @@
+core/        # lógica pura (indicadores, backtest, métricas)
+app/         # Streamlit UI
+scripts/     # CLI
+tests/       # pytest
+config/      # settings.toml
+docs/        # documentación técnica
